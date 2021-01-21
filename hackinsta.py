@@ -16,7 +16,7 @@ else:
 
 
 
-def userExists(username):
+def userExists(glasnovic02):
 	r = requests.get('https://www.instagram.com/%s/?__a=1' % username) 
 	if (r.status_code == 404):
 		print ('User not found')
@@ -27,7 +27,7 @@ def userExists(username):
 		return {'username':username,'id':fUserID}
 
 
-def Login(username,password):
+def Login(glasnovic02,password):
 	sess = requests.Session()
 	sess.cookies.update ({'sessionid' : '', 'mid' : '', 'ig_pr' : '1', 'ig_vw' : '1920', 'csrftoken' : '',  's_network' : '', 'ds_user_id' : ''})
 	sess.headers.update({
@@ -49,7 +49,7 @@ def Login(username,password):
 	r = sess.get('https://www.instagram.com/') 
 	sess.headers.update({'X-CSRFToken' : r.cookies.get_dict()['csrftoken']})
 
-	data = {'username':username, 'password':password}
+	data = {'glasnovic02':glasnovic02, 'password':password}
 	r = sess.post('https://www.instagram.com/accounts/login/ajax/', data=data, allow_redirects=True)
 	token = r.cookies.get_dict()['csrftoken']
 	sess.headers.update({'X-CSRFToken' : token})
@@ -67,12 +67,12 @@ def Login(username,password):
 
 
 
-def follow(sess, username):
+def follow(sess, glasnovic02):
 	username = userExists(username)
 	if (username == False):
 		return	
 	else:
-		userID = username['id']
+		userID = glasnovic02['id']
 		followReq = sess.post('https://www.instagram.com/web/friendships/%s/follow/' % userID)
 		print (followReq.text)
 
